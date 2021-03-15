@@ -20,7 +20,7 @@ const pubKey = secp256k1.publicKeyCreate(privKey)
 
 
 // sign the message
-console.log(secp256k1.ecdsaSign(hash, privKey))
+const sigObj = secp256k1.ecdsaSign(hash, privKey)
 
 
 // verify the signature
