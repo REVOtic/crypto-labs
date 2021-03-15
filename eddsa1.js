@@ -1,16 +1,18 @@
 var EdDSA = require('elliptic').eddsa;
-
+var md5 = require('md5')
+// Create and initialize EdDSA context
+// (better do it once and reuse it)
 var ec = new EdDSA('ed25519');
+let secret = "Hello how are you1?"
+let hexString = ec.makeSignature(secret);
+//console.log(hexString);
+// Create key pair from secret
+var key = ec.keyFromSecret(hexString); // hex string, array or Buffer
 
-var key = ec.keyFromSecret('693e3c...');
-
-var msgHash = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+// Sign the message's hash (input must be an array, or a hex-string)
+var msgHash = md5('Here comes the Sun');
 var signature = key.sign(msgHash).toHex();
 
+// Verify signature
 console.log(key.verify(msgHash, signature));
 
-var pub = '0a1af638...';
-var key = ec.keyFromPublic(pub, 'hex');
-
-var signature = '70bed1...';
-console.log(key.verify(msgHash, signature));
