@@ -36,13 +36,14 @@ In the implementation, since the keys are generated and is shared using derived 
 
 ## Packages installed
 > `npm i aes256` </br>
-> `npm i node-rsa`
-> `npm i elliptic`
-> `npm i crypto`
-> `npm i noble-ed25519`
-> `npm i md5`
-> `npm i secp256k1`
-> `npm i eccrypto`
+> `npm i node-rsa`</br>
+> `npm i elliptic`</br>
+> `npm i crypto`</br>
+> `npm i noble-ed25519`</br>
+> `npm i md5`</br>
+> `npm i noble-secp256k1`</br>
+> `npm i eccrypto`</br>
+> `npm i sha256` </br>
 ### Note
 - [`RSA is not as efficient in practice as ECDSA for signing purpose while validation of signature is faster with RSA.`]
 - [`EdDSA is gaining more transacton nowadays as it is easy to implement and is faster than ECDSA. It also has plenty of secure open-source code available.`]
