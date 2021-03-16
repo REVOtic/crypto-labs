@@ -10,17 +10,20 @@
   "license": "ISC",
   "dependencies": {
     "aes256": "^1.1.0",
-    "assert": "^2.0.0",
     "big-integer": "^1.6.48",
     "bignum": "^0.13.1",
     "bn.js": "^5.2.0",
     "crypto": "^1.0.1",
-    "eccrypto": "^1.1.5",
+    "crypto-js": "^4.0.0",
+    "eccrypto": "^1.0.4",
     "ed25519": "^0.0.5",
     "elliptic": "^6.5.4",
     "md5": "^2.3.0",
     "noble-ed25519": "^1.0.3",
+    "noble-secp256k1": "^1.1.2",
+    "node": "^15.10.0",
     "node-rsa": "^1.1.1",
-    "secp256k1": "^4.0.2"
+    "secp256k1": "^4.0.2",
+    "sha256": "^0.2.0"
   }
 }

@@ -1,4 +1,4 @@
-    Summary of Implementation of various Cryptographic Algorithms
+#    Summary of Implementation of various Cryptographic Algorithms
 
 ## AES256
 Also known as Advanced Encryption Standard that has 256 bits of symmetric key that use same key for  both encryption as well as decryption. The bit size 256 is a form of AES that has 14 rounds of encryption that provides the highest level of security since it is implemented for sensitive data and is used for data in transit or network connection. Used in file encryption and wireless security.
@@ -35,15 +35,14 @@ In the implementation, since the keys are generated and is shared using derived 
 
 
 ## Packages installed
-> npm i aes256
-> npm i node-rsa
-> npm i elliptic
-> npm i crypto
-> npm i noble-ed25519
-> npm i md5
-> npm i secp256k1
-> npm i eccrypto
-
+> `npm i aes256`
+> `npm i node-rsa`
+> `npm i elliptic`
+> `npm i crypto`
+> `npm i noble-ed25519`
+> `npm i md5`
+> `npm i secp256k1`
+> `npm i eccrypto`
 ### Note
 - [`RSA is not as efficient in practice as ECDSA for signing purpose while validation of signature is faster with RSA.`]
 - [`EdDSA is gaining more transacton nowadays as it is easy to implement and is faster than ECDSA. It also has plenty of secure open-source code available.`]

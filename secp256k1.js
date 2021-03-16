@@ -1,25 +1,86 @@
-const { randomBytes } = require('crypto')
-const secp256k1 = require('secp256k1')
-// or require('secp256k1/elliptic')
+const secp = require("noble-secp256k1");
+const sha256 = require("sha256");
 
-// generate message to sign
-// message should have 32-byte length, if you have some other length you can hash message
-// for example `msg = sha256(rawMessage)`
-const msg = randomBytes(32)
-const msg2 = randomBytes(32)
-// generate privKey
-let privKey
-do {
-  privKey = randomBytes(32)
- // console.log(privKey.private)
-} while (!secp256k1.privateKeyVerify(privKey))
+const getPrivateKey = () => {
+    return new Promise((resolve, reject) => {
+        resolve(sha256("private-key"));
+    });
+};
 
-// get the public key in a compressed format
-const pubKey = secp256k1.publicKeyCreate(privKey)
+const getPublicKey = (privateKey) => {
+    return new Promise((resolve, reject) => {
+        if (!privateKey) {
+            return reject("Private key is required to generate public key.");
+        }
+        resolve(secp.getPublicKey(privateKey));
+    });
+};
 
-// sign the message
-const sigObj = secp256k1.ecdsaSign(msg, privKey)
+const signSignature = async (hashedMessage, privateKey) => {
+    return new Promise((resolve, reject) => {
+        if (!hashedMessage || !privateKey) {
+            return reject("Hashed Message and private key is required.");
+        }
+        resolve(secp.sign(hashedMessage, privateKey));
+    });
+};
 
-// verify the signature
-console.log(secp256k1.ecdsaVerify(sigObj.signature, msg, pubKey))
-// => true
+const verifySignature = (signature, hashedMessage, publicKey) => {
+    return new Promise((resolve, reject) => {
+        if (!signature || !hashedMessage || !publicKey) {
+            return reject("Something is missing.");
+        }
+
+        resolve(secp.verify(signature, hashedMessage, publicKey));
+    });
+};
+
+const retractPublicKey = (privateKey) => {
+    if (!privateKey) {
+        return null;
+    }
+    return secp.schnorr.getPublicKey(privateKey);
+};
+
+const rSignature = async (hashedMessage, privateKey) => {
+    return new Promise((resolve, reject) => {
+        if (!hashedMessage || !privateKey) {
+            return reject("Something is missing");
+        }
+
+        resolve(secp.schnorr.sign(hashedMessage, privateKey));
+    });
+};
+
+const signed = async (rsignature, hashedMessage, rpub) => {
+    return new Promise((resolve, reject) => {
+        if (!rsignature || !hashedMessage || !rpub) {
+            return reject("Something is missing.");
+        }
+
+        resolve(secp.schnorr.verify(rsignature, hashedMessage, rpub));
+    });
+};
+
+(async () => {
+    // You pass either a hex string, or Uint8Array
+    const privateKey = await getPrivateKey();
+    const message = "this is a long message";
+    const hashedMessage = sha256(message);
+
+    const publicKey = await getPublicKey(privateKey);
+
+    const signature = await signSignature(hashedMessage, privateKey);
+
+    const isSigned = await verifySignature(signature, hashedMessage, publicKey);
+
+    const rpub = retractPublicKey(privateKey);
+
+    const rsignature = await rSignature(hashedMessage, privateKey);
+
+    const risSigned = await signed(rsignature, hashedMessage, rpub);
+
+    console.log(
+        `private-key:: ${privateKey} \npublic-key: ${publicKey} hash-message: ${hashedMessage} \nmessage:: ${hashedMessage} \nsignature: ${signature} \nverify-signature: ${isSigned} \nrpublic: ${rpub} \nrSignature:: ${rsignature} \nrisSigned: ${risSigned}`
+    );
+})();
