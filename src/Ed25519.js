@@ -15,7 +15,7 @@ const checkSignature = (message, signature, aliceKeypair) => {
 	})
 }
 
-const main = async () => {
+const localEd25519 = async () => {
 	// Alice likes to be random, and remembers that the MakeKeypair function takes a 32 byte buffer
 	var aliceSeed = crypto.randomBytes(32); //random byte buffer of 32 byte size
 	var aliceKeypair = ed25519.MakeKeypair(aliceSeed);
@@ -37,7 +37,7 @@ const main = async () => {
 
 // Alice sends her message and signature over to bob.
 
-main()
+module.exports = localEd25519;
 
 
 
