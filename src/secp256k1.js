@@ -62,7 +62,7 @@ const signed = async (rsignature, hashedMessage, rpub) => {
     });
 };
 
-(async () => {
+ const localsecp256k1= async () => {
     // You pass either a hex string, or Uint8Array
     const privateKey = await getPrivateKey();
     const message = "this is a long message";
@@ -83,4 +83,5 @@ const signed = async (rsignature, hashedMessage, rpub) => {
     console.log(
         `private-key:: ${privateKey} \npublic-key: ${publicKey} hash-message: ${hashedMessage} \nmessage:: ${hashedMessage} \nsignature: ${signature} \nverify-signature: ${isSigned} \nrpublic: ${rpub} \nrSignature:: ${rsignature} \nrisSigned: ${risSigned}`
     );
-})();
+};
+module.exports = localsecp256k1;

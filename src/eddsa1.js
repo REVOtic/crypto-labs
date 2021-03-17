@@ -2,7 +2,8 @@ var EdDSA = require('elliptic').eddsa;
 var md5 = require('md5')
 // Create and initialize EdDSA context
 // (better do it once and reuse it)
-var ec = new EdDSA('ed25519');
+function localEddsa(){
+    var ec = new EdDSA('ed25519');
 let secret = "Hello how are you1?"
 let hexString = ec.makeSignature(secret);
 //console.log(hexString);
@@ -15,4 +16,6 @@ var signature = key.sign(msgHash).toHex();
 
 // Verify signature
 console.log(key.verify(msgHash, signature));
+}
+module.exports = localEddsa;
 

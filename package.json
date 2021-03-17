@@ -1,19 +1,19 @@
 {
-  "name": "ed25519",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@revoalgotechnique/common",
+  "version": "1.0.2",
+  "description": "## AES256 Also known as Advanced Encryption Standard that has 256 bits of symmetric key that use same key for  both encryption as well as decryption. The bit size 256 is a form of AES that has 14 rounds of encryption that provides the highest level of security since it is implemented for sensitive data and is used for data in transit or network connection. Used in file encryption and wireless security. In the implementation, there is shared key between alice, bob and may. Since the shared key is computed between alice and bob, may will not be able to read the message.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@revoalgotechnique/common": "^1.0.0",
     "aes256": "^1.1.0",
     "big-integer": "^1.6.48",
     "bignum": "^0.13.1",
     "bn.js": "^5.2.0",
-    "crypto": "^1.0.1",
     "crypto-js": "^4.0.0",
     "eccrypto": "^1.0.4",
     "ed25519": "^0.0.5",
@@ -23,7 +23,19 @@
     "noble-secp256k1": "^1.1.2",
     "node": "^15.10.0",
     "node-rsa": "^1.1.1",
+    "prompt": "^1.1.0",
     "secp256k1": "^4.0.2",
     "sha256": "^0.2.0"
-  }
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/REVOtic/crypto-labs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/REVOtic/crypto-labs/issues"
+  },
+  "homepage": "https://github.com/REVOtic/crypto-labs#readme"
 }
